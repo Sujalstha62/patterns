@@ -1,0 +1,190 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int n,i,j,k;
+void menu(){
+	char list[][20]={
+	"Diamond",
+	"Diamond hollow",
+	"Downhill",
+	"Hour glass",
+	"Pascal's triangle",
+	"Pyramid with number",
+	"X"};
+	int n = sizeof(list) / sizeof(list[0]);  // number of strings
+    for(int i = 0; i < n; i++) {
+        cout << i+1<<"."<<list[i] << endl;
+    }
+}
+void hollowtriangle(){
+	cout<<"Enter a number:";
+	cin>>n;
+	for(i=0;i<n;i++){
+		cout<<string((n-i),' ');
+		for(j=0;j<=i*2;j++){
+			if(j==0 || j==2*i)
+			cout<<"*";	
+			else
+			cout<<" ";
+		}
+		cout<<endl;
+	}
+	for(i=n-2;i>=0;i--){
+		cout<<string((n-i),' ');
+		for(j=i*2;j>=0;j--){
+			if(j==0 || j==2*i)
+			cout<<"*";	
+			else
+			cout<<" ";
+		}
+		cout<<endl;
+	}
+}
+void pyramid(){
+	cout<<"Enter a number:";
+	cin>>n;
+	for(i=0;i<n;i++){
+		cout<<string(2*(n-i),' ');
+		for(j=0;j<=i*2;j++){
+			if(j<=i)
+			cout<<j+1;
+			else
+			cout<<2*i-j+1;
+			cout<<" ";
+		}
+		cout<<endl;
+	}
+}
+void X(){
+	cout<<"Enter a number:";
+	cin>>n;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			if(i==j || i==n-j-1)
+			cout<<"*";
+			else
+			cout<<" ";
+		}
+		cout<<endl;
+	}
+}
+void hourglass(){
+	cout<<"Enter a number:";
+	cin>>n;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			if(i<=(n-1)/2){
+				if(i<=j && j<n-i)
+				cout<<"*";
+				else
+				cout<<" ";
+			}
+			else{
+				if(i>=j && j>=n-i-1)
+				cout<<"*";
+				else
+				cout<<" ";
+			}
+		}
+		cout<<endl;
+	}
+}
+void diamond(){
+	cout<<"Enter a number:";
+	cin>>n;
+	for(i=0;i<n;i++){
+		cout<<string(2*(n-i),' ');
+		for(j=0;j<=i*2;j++){
+			if(j<=i)
+			cout<<j+1;
+			else
+			cout<<2*i-j+1;
+			cout<<" ";
+		}
+		cout<<endl;
+	}
+	for(i=n-2;i>=0;i--){
+		cout<<string(2*(n-i),' ');
+		for(j=i*2;j>=0;j--){
+			if(j>=i)
+			cout<<i*2-j+1;
+			else
+			cout<<j+1;
+			cout<<" ";
+		}
+		cout<<endl;
+	}
+}
+void downhill(){
+    int a,b;
+    cout << "Enter a number:";
+    cin >> n;
+    a=1;
+    for(i=n;i>=1;i--) {
+        cout << a<<"\t" ;
+        b=a-i; 
+        a+=i;
+        for(j=i;j<n;j++) {
+            cout << b <<"\t";
+            b=b-j-1;
+        }
+        cout << endl;
+    }
+}
+void pascaltriangle(){
+    cout << "Enter a number:";
+    cin >> n;
+    vector <double> a;
+    for(i=1;i<=n;i++){
+    vector <double> b(i);
+    for(k=n;k>=i;k--) {
+        cout << " ";
+    }
+    for(j=0;j<i;j++){
+        if(j==0 || j==(i-1)){
+        b[j]=1;
+        }
+        else{
+        b[j]=a[j]+a[j-1];
+        }
+    cout << b[j]<<" ";    
+    }
+    a=b;
+    cout << endl;
+    }
+}
+int main(){
+	int ch;
+	while(1){
+		menu();
+		cout<<"Enter your choice(Enter any character to exit):";
+		cin>>ch;
+		switch(ch){
+			case 1:
+				diamond();
+				break;
+			case 2:
+				hollowtriangle();
+				break;
+			case 3:
+				downhill();
+				break;
+			case 4:
+				hourglass();
+				break;
+			case 5:
+				pascaltriangle();
+				break;
+			case 6:
+				pyramid();
+				break;
+			case 7:
+				X();
+				break;
+			default:
+				cout<<"Thankyou!";
+				exit(0);
+		}
+		cout<<endl;
+	}
+}
