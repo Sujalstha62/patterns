@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<conio.h>
 using namespace std;
 int n,i,j,k;
 void menu(){
@@ -10,13 +11,56 @@ void menu(){
 	"Hour glass",
 	"Pascal's triangle",
 	"Pyramid with number",
+	"Spiral",
 	"X"};
 	int n = sizeof(list) / sizeof(list[0]);  // number of strings
     for(int i = 0; i < n; i++) {
         cout << i+1<<"."<<list[i] << endl;
     }
 }
-void hollowtriangle(){
+void printMatrix(const vector<vector<int> >& a) {
+    for (int i = 0; i < a.size(); i++) {
+        for (int j = 0; j < a[i].size(); j++) {
+            cout << a[i][j] << "\t";
+        }
+        cout << endl;
+    }
+}
+void fillSpiral(vector<vector<int> >& a, int n) {
+    int top = 0, bottom = n - 1;
+    int left = 0, right = n - 1;
+    int c = 1;
+    while (top <= bottom && left <= right) {
+        for (int j = left; j <= right; j++) {
+            a[top][j] = c++;
+        }
+        top++;
+        for (int i = top; i <= bottom; i++) {
+            a[i][right] = c++;
+        }
+        right--;
+        if (top <= bottom) {
+            for (int j = right; j >= left; j--) {
+                a[bottom][j] = c++;
+            }
+            bottom--;
+        }
+        if (left <= right) {
+            for (int i = bottom; i >= top; i--) {
+                a[i][left] = c++;
+            }
+            left++;
+        }
+    }
+}
+void spiral() {
+    cout << "Enter a number: ";
+    cin >> n;
+    vector<vector<int> > a(n, vector<int>(n, 0));
+    fillSpiral(a, n);
+    printMatrix(a); 
+}
+void hollowdiamond(){
 	cout<<"Enter a number:";
 	cin>>n;
 	for(i=0;i<n;i++){
@@ -164,7 +208,7 @@ int main(){
 				diamond();
 				break;
 			case 2:
-				hollowtriangle();
+				hollowdiamond();
 				break;
 			case 3:
 				downhill();
@@ -179,6 +223,9 @@ int main(){
 				pyramid();
 				break;
 			case 7:
+				spiral();
+				break;
+			case 8:
 				X();
 				break;
 			default:
@@ -187,4 +234,5 @@ int main(){
 		}
 		cout<<endl;
 	}
+	getch();
 }
